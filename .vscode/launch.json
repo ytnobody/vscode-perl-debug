@@ -11,7 +11,7 @@
             ],
             "stopOnEntry": true,
             "sourceMaps": false,
-            "preLaunchTask": "watch"
+            "preLaunchTask": "build"
         }
     ]
 }

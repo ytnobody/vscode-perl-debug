@@ -2,23 +2,37 @@
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
     "version": "0.1.0",
-    "command": "perl",
+    "command": "sh",
     "isShellCommand": true,
     "tasks": [
         {
-            "taskName": "watch",
+            "taskName": "build",
             "suppressTaskName": true,
+            "isBuildCommand": true,
+            "args": [
+                "prove",
+                "./.vscode/t/"
+            ]
+        },
+        {
+            "taskName": "watcher",
+            "suppressTaskName": true,
+            "isBuildCommand": true,
             "isWatching": true,
             "args": [
-                "./.vscode/bin/watcher.pl",
-                "./"
+                "perl",
+                "./.vscode/bin/watcher.pl"
             ]
         },
         {
             "taskName": "setup-extention",
             "suppressTaskName": true,
             "args": [
-                "./.vscode/bin/setup.pl"
+                "cpanm",
+                "-l", "./.vscode/local",
+                "-n",
+                "--installdeps",
+                "./.vscode/"
             ]
         }
     ],
