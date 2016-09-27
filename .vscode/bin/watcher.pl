@@ -15,6 +15,6 @@ my $watcher = File::ChangeNotify->instantiate_watcher(
 while (my @events = $watcher->wait_for_events) {
     sleep 1;
     if (grep {$_->type eq 'modify'} @events) { 
-        system('prove', $linter);
+        system('prove', '-v', $linter);
     }
 }

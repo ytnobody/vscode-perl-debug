@@ -1,0 +1,21 @@
+{
+    "targets": [
+        "lib",
+        "t",
+        "bin",
+        "script" 
+    ],
+    "ignore_files": [],
+    "filter": [
+        "LikePerlCritic::Stern"
+    ],
+    "ignore_policies": [
+        "Modules::RequireVersionVar",
+        "NamingConventions::Capitalization",
+        "References::ProhibitDoubleSigils",
+        "RegularExpressions::RequireDotMatchAnything",
+        "RegularExpressions::RequireLineBoundaryMatching",
+        "ValuesAndExpressions::ProhibitEmptyQuotes",
+        "ValuesAndExpressions::RequireNumberSeparators"
+    ] 
+}

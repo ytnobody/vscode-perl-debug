@@ -7,23 +7,27 @@ use lib (
 );
 use Test::More;
 use Test::Perl::Lint;
+use JSON;
 
-my @targets = grep {-d $_} map {File::Spec->catdir(dirname(__FILE__), qw/.. ../, $_)} qw[
-    lib
-    t 
-    bin 
-    script
+my $config_file = File::Spec->catfile(dirname(__FILE__), qw/.. perl-lint.json/);
+
+open my $jh, '<', $config_file || die $!;
+my $config = JSON->new->decode(do{
+    local $/;
+    <$jh>;
+});
+close $jh;
+
+$config->{targets} = [
+    grep {-d $_} map {
+        File::Spec->catdir(dirname(__FILE__), qw/.. ../, $_);
+    } @{$config->{targets}}
 ];
 
-if (scalar(@targets) < 1) {
-    plan(skip_all => 'target is not found');
-}
+diag 'Start to lint...';
 
-all_policies_ok({
-    targets         => [@targets],
-    ignore_files    => [],
-    filter          => ['LikePerlCritic::Stern'],
-    ignore_policies => ['Modules::RequireVersionVar'], 
-});
+subtest 'Lint' => sub {
+    all_policies_ok($config);
+};
 
 done_testing;
