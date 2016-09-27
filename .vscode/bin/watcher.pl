@@ -4,7 +4,7 @@ use File::ChangeNotify;
 use File::Basename 'dirname';
 use File::Spec;
 
-our $linter = File::Spec->catfile(dirname(__FILE__), qw/lint.t/);
+our $linter = File::Spec->catdir(dirname(__FILE__), qw/.. t/);
 
 my ($watchpath) = @ARGV;
 my $watcher = File::ChangeNotify->instantiate_watcher(
@@ -15,6 +15,6 @@ my $watcher = File::ChangeNotify->instantiate_watcher(
 while (my @events = $watcher->wait_for_events) {
     sleep 1;
     if (grep {$_->type eq 'modify'} @events) { 
-        system('prove', '-v', $linter);
+        system('prove', $linter);
     }
 }

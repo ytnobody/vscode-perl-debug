@@ -1,3 +1,3 @@
 use strict;
 use warnings;
-$Boo = 'hoge';
+my $foobar;
