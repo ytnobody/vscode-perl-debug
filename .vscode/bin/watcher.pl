@@ -3,8 +3,9 @@ use warnings;
 use File::ChangeNotify;
 use File::Basename 'dirname';
 use File::Spec;
+use Cwd 'abs_path';
 
-our $tester = File::Spec->catdir(dirname(__FILE__), qw/.. t/);
+our $tester = abs_path(File::Spec->catdir(dirname(__FILE__), qw/.. t/));
 
 my ($watchpath) = @ARGV;
 $watchpath ||= '.';
